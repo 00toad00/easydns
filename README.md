@@ -1,0 +1,2 @@
+# easydns
+Small DNS Forwarder

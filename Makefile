@@ -12,6 +12,8 @@ CFLAGS		:= -std=c11 -O2 -Wall -Wextra
 CXXFLAGS	:= -std=c++20 -O2 -Wall -Wextra
 LDLIBS		:=
 
+REQUIREMENTS 	:= clang
+
 .PHONY: all clean
 all: $(TARGET)
 
@@ -28,5 +30,8 @@ build/%.o: src/%.c
 
 clean:
 	rm -rf $(BUILDDIR) $(TARGET)
+
+requirements:
+	@echo $(REQUIREMENTS)
 
 -include $(OBJ:.o=.d)

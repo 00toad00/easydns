@@ -1,0 +1,12 @@
+### Config
+
+/etc/easyhttp/config.json                               # Global settings
+/etc/easyhttp/sites/{site name}.json                    # Site settings
+
+### Program
+
+/usr/bin / /usr/local/bin 
+
+### Log
+
+/var/log/{site name}/{startup date and time}.log        # If not configured

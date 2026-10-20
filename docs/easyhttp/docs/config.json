@@ -1,0 +1,43 @@
+{
+    "server": {
+        "listen": [
+            { "ip": "0.0.0.0",  "port": 80 },
+            { "ip": "::",       "port": 80}
+        ],
+
+        "limits": {
+            "max_connections":     1024,
+            "max_header_size":     8192,
+            "max_uri_length":      2048,
+            "max_body_size":       1048576,
+            "header_timeout_ms":   10000,
+            "body_timeout_ms":     30000,
+            "keepalive_timeout_ms": 5000,
+            "keepalive_max_requests": 100
+        }
+    },
+
+    "site": [
+        {
+            "root": "/path/to/root",
+            "index": "/path/to/index.html",
+
+            "error-page": {
+                "404": "errors/404.html",
+                "500": "errors/500.html"
+            },
+
+            "redirect": [
+                { "from": "/old", "to": "/new", "code": 301 }
+            ],
+
+            "alias": [
+                "/favicon.ico", "/assets/favicon.ico"
+            ],
+
+            "cache": [
+                "/path-to-index.html"
+            ]
+        }
+    ]
+}

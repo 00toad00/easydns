@@ -7,5 +7,7 @@ int main(int argc, char **argv) {
     DnsRequest req;
     DnsResponse res;
 
+    req.encode();
+
     return 0;
 }

@@ -24,6 +24,11 @@ class UdpSocket {
         int bind(sockaddr *addr);
         int bind(const char *ip, unsigned short port);
 
-        void sendTo(void *buf, size_t n, struct sockaddr *addr);
-        void sendTo(std::string, struct sockaddr *addr);
+        ssize_t sendTo(void *data, size_t n, sockaddr *addr);
+        ssize_t sendTo(void *data, size_t n, const char *ip, unsigned short port);
+        ssize_t sendTo(std::string &data, sockaddr *addr);
+        ssize_t sendTo(std::string &data, const char *ip, unsigned short port);
+
+        ssize_t recvFrom(void *buf, size_t n, sockaddr *addr, socklen_t *len);
+        ssize_t recvFrom(std::string &buf, sockaddr *addr, socklen_t *len);
 };

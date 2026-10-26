@@ -9,11 +9,30 @@ static inline bool fd_is_alive(int fd) {
 
 UdpSocket::UdpSocket() {
     fd = -1;
-    af = -1;
+    af = AF_UNSPEC;
 }
 
 UdpSocket::~UdpSocket() {
     if (fd_is_alive(fd)) { ::close(fd); }
+}
+
+UdpSocket::UdpSocket(UdpSocket&& other) noexcept : 
+    fd(other.fd), af(other.af), addr4(other.addr4), addr6(other.addr6) {
+    fd = -1;
+    af = AF_UNSPEC;
+}
+
+UdpSocket& UdpSocket::operator=(UdpSocket&& other) noexcept {
+    if (this != &other) {
+        close();
+        fd      = other.fd;
+        af      = other.fd;
+        addr4   = other.addr4;
+        addr6   = other.addr6;
+        other.fd = -1;
+        other.af = AF_UNSPEC;
+    }
+    return *this;
 }
 
 int UdpSocket::createV4() {
@@ -40,7 +59,7 @@ int UdpSocket::close() {
     if (!fd_is_alive(fd)) { return 0; }
     int i = ::close(fd);
     fd = -1;
-    af = -1;
+    af = AF_UNSPEC;
     return i;
 }
 

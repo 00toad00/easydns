@@ -16,6 +16,12 @@ class UdpSocket {
         UdpSocket();
         ~UdpSocket();
 
+        UdpSocket(const UdpSocket&) = delete;
+        UdpSocket& operator=(const UdpSocket&) = delete;
+
+        UdpSocket(UdpSocket&& other) noexcept;
+        UdpSocket& operator=(UdpSocket&& other) noexcept;
+
         int createV4();
         int createV6();
         int close();
@@ -31,4 +37,20 @@ class UdpSocket {
 
         ssize_t recvFrom(void *buf, size_t n, sockaddr *addr, socklen_t *len);
         ssize_t recvFrom(std::string &buf, sockaddr *addr, socklen_t *len);
+
+        int getFd();
+        int getAf();
+        sockaddr *getSockAddrIn();
 };
+
+inline int UdpSocket::getFd() {
+    return fd;
+}
+
+inline int UdpSocket::getAf() {
+    return af;
+}
+
+inline sockaddr *UdpSocket::getSockAddrIn() {
+    return (af == AF_INET) ? (sockaddr*)&addr4 : (sockaddr*)&addr6;
+}
